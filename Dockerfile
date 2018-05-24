@@ -29,7 +29,7 @@ RUN mkdir -p /var/lib/zap/.vnc
 COPY configuration/* /var/lib/zap/
 # COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk/
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/
 ENV PATH $JAVA_HOME/bin:/zap:$PATH
 ENV ZAP_PATH /zap/zap.sh
 ENV HOME /var/lib/zap

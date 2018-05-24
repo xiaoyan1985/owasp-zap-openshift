@@ -29,7 +29,7 @@ RUN mkdir -p /var/lib/jenkins/.vnc
 COPY configuration/* /var/lib/jenkins/
 COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk/
 ENV PATH $JAVA_HOME/bin:/zap:$PATH
 ENV ZAP_PATH /zap/zap.sh
 ENV HOME /var/lib/jenkins
@@ -52,7 +52,8 @@ RUN chown root:root /zap -R && \
     chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
 
-WORKDIR /var/lib/jenkins
-
+# WORKDIR /var/lib/jenkins
+EXPOSE 8080
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
+CMD ["/zap/zap-webswing.sh", "run"]

@@ -12,7 +12,7 @@ RUN yum install -y redhat-rpm-config \
     xorg-x11-server-Xvfb openbox xterm \
     net-tools python-pip \
     firefox nss_wrapper java-1.8.0-openjdk-headless \
-    java-1.8.0-openjdk-devel nss_wrapper git && \
+    java-1.8.0-openjdk-devel nss_wrapper git which xauth && \
     yum clean all
 
 RUN pip install --upgrade pip
@@ -23,22 +23,22 @@ RUN pip install python-owasp-zap-v2.4
 RUN mkdir -p /zap/wrk
 ADD zap /zap/
 
-RUN mkdir -p /var/lib/jenkins/.vnc
+RUN mkdir -p /var/lib/zap/.vnc
 
 # Copy the entrypoint
-COPY configuration/* /var/lib/jenkins/
-COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
+COPY configuration/* /var/lib/zap/
+# COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk/
 ENV PATH $JAVA_HOME/bin:/zap:$PATH
 ENV ZAP_PATH /zap/zap.sh
-ENV HOME /var/lib/jenkins
+ENV HOME /var/lib/zap
 
 # Default port for use with zapcli
 ENV ZAP_PORT 8080
 
-COPY policies /var/lib/jenkins/.ZAP/policies/
-COPY .xinitrc /var/lib/jenkins/
+COPY policies /var/lib/zap/.ZAP/policies/
+COPY .xinitrc /var/lib/zap/
 
 WORKDIR /zap
 # Download and expand the latest stable release 
@@ -52,7 +52,7 @@ RUN chown root:root /zap -R && \
     chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
 
-# WORKDIR /var/lib/jenkins
+WORKDIR /var/lib/zap
 EXPOSE 8080
 # Run the Jenkins JNLP client
 # ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]

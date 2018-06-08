@@ -21,10 +21,11 @@ RUN pip install zapcli
 RUN pip install python-owasp-zap-v2.4
 
 RUN mkdir -p /zap/wrk
-#COPY zap/zap-openapi.json /zap/
-RUN chmod 777 zap/zap-openapi.json
+RUN cd zap
+RUN ls
 ADD zap /zap/
-
+RUN cd /zap
+RUN ls
 RUN mkdir -p /var/lib/zap/.vnc
 
 # Copy the entrypoint

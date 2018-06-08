@@ -21,6 +21,7 @@ RUN pip install zapcli
 RUN pip install python-owasp-zap-v2.4
 
 RUN mkdir -p /zap/wrk
+COPY zap/zap-openapi.json /zap/
 ADD zap /zap/
 
 RUN mkdir -p /var/lib/zap/.vnc

@@ -22,7 +22,7 @@ RUN pip install python-owasp-zap-v2.4
 
 RUN mkdir -p /zap/wrk
 #COPY zap/zap-openapi.json /zap/
-RUN chmod 777 /zap/zap-openapi.json
+RUN chmod 777 zap/zap-openapi.json
 ADD zap /zap/
 
 RUN mkdir -p /var/lib/zap/.vnc

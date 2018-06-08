@@ -21,11 +21,7 @@ RUN pip install zapcli
 RUN pip install python-owasp-zap-v2.4
 
 RUN mkdir -p /zap/wrk
-RUN cd zap
-RUN ls
 ADD zap /zap/
-RUN cd /zap
-RUN ls
 RUN mkdir -p /var/lib/zap/.vnc
 
 # Copy the entrypoint
